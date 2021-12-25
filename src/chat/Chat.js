@@ -5,13 +5,14 @@ import Divider from '@mui/material/Divider';
 import db from '../firebase';
 import { AttachFile, InsertEmoticonOutlined, MicOutlined, MoreVert, SearchRounded } from '@mui/icons-material';
 import { useParams } from "react-router-dom";
-import { collection, query, where, getDocs,setDoc,onSnapshot,doc, getDoc } from "firebase/firestore";
+import {  collection,onSnapshot ,doc, getDoc, orderBy } from "firebase/firestore";
 function Chat() {
     const[seed,setSeed]=useState("");
     const[input,setInput]=useState("");
     const { roomId } = useParams();
     // console.log(roomId)
     const [roomName, setRoomName] = useState("");
+    const [messages, setMessages] = useState([]);
     useEffect(() => {
     setSeed(Math.floor(Math.random()*5000))
     }, [])
@@ -22,10 +23,20 @@ function Chat() {
     }
     //roomview to get data from
     const d=doc(db,"rooms",roomId)
+
   getDoc(d)
   .then((doc)=>{
      setRoomName(doc.data().name)
   })
+//   timestamp
+const td=doc(collection(db,"rooms","messages","message"),roomId)
+
+getDoc(td)
+.then((doc)=>{
+    onSnapshot(td,(snapshot)=>( 
+        setMessages(doc.data())))
+})
+console.log(messages)
     return (
         <div className="Chat">
             <div className="Chat__header">

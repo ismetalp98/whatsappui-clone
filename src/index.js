@@ -4,9 +4,13 @@ import './index.css';
 import App from './App';
 
 
+import reducer, { initialState } from "./login/reducer";
+import { StateProvider } from "./login/StateProvider";
+
 ReactDOM.render(
-  <React.StrictMode>
+  <StateProvider initialState={initialState} reducer={reducer}>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </StateProvider>,
+  document.getElementById("root")
 );
+

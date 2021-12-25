@@ -3,11 +3,12 @@ import React,{useState,useEffect} from 'react'
 import "./sidebar.css"
 import db from '../firebase';
 
-import { Avatar, IconButton } from '@mui/material';
-import { ChatBubble, DonutLargeRounded, MoreVert, SearchRounded } from '@mui/icons-material';
+import { Avatar, Button, IconButton } from '@mui/material';
+import { ChatBubble, DonutLargeRounded, ExitToAppOutlined, MoreVert, SearchRounded } from '@mui/icons-material';
 import Divider from '@mui/material/Divider';
 import { collection,onSnapshot } from "firebase/firestore";
 import Sidebarchat from './Sidebarchat';
+import { getAuth, signOut } from "firebase/auth";
 
 function Sidebar() {
     const[rooms,setRooms]= useState([]);
@@ -21,7 +22,16 @@ function Sidebar() {
       
     ,[]
     )
-    
+
+function logout () {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+        localStorage.removeItem("uid");
+        window.location.reload();
+    }).catch((error) => {
+     alert(error.message)
+    });
+}
     // console.log(rooms)
     const[seed,setSeed]=useState("");
     useEffect(() => {
@@ -37,7 +47,7 @@ function Sidebar() {
                <DonutLargeRounded style={{color:"#B1B3B5"}}/>
                </IconButton>
                <IconButton> <ChatBubble style={{color:"#B1B3B5"}}/> </IconButton>
-               <IconButton> <MoreVert style={{color:"#B1B3B5"}}/> </IconButton>
+               <IconButton onClick={logout}><ExitToAppOutlined   style={{color:"#B1B3B5"}}/> </IconButton>
            </div>
         </div>
         <Divider/>
