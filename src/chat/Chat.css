@@ -1,0 +1,112 @@
+.Chat{
+    display: flex;
+    flex: 0.70;
+    flex-direction: column;
+    /* background-color: lightgray; */
+}
+.Chat__header{
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    height:40px;
+    border-bottom:1px solid rgb(48, 48, 48);
+}
+.Chat__headerinfo{
+flex: 1;
+padding-left: 20px;
+}
+.Chat__headerinfo > h3{
+margin-bottom: 3px;
+font-size: 14px;
+font-weight: 500;
+color:#f1f1f2eb ;
+    }
+.Chat__headerinfo > p{
+    color:#f1f1f2a1 ;
+    font-size: 12px;
+     }
+
+.Chat_headerright{
+    display: flex;
+    justify-content: space-between;
+    min-width: 100px;
+}
+.Chat__body{
+    background-image:url(./whatsapp.png);
+background-position: center;
+background-repeat: repeat;
+padding: 30px;
+overflow: scroll;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+.Chat__Messages{
+position: relative;
+font-size: 16px;
+padding: 13px 16px 12px 14px;
+border-radius: 6px;
+margin-top: 2px;
+width: fit-content;
+color:#f1f1f2eb ;
+background-color: #323739;
+margin-bottom: 30px;
+
+}
+.Chat__Reciver{
+   margin-left: auto;
+font-size: 16px;
+padding: 13px 16px 12px 14px;
+border-radius: 6px;
+margin-top: 2px;
+width: fit-content;
+    color:#f1f1f2eb ;
+    background-color: #1d6f70;
+    margin-bottom: 30px;
+    
+    }
+.Chat__footer{
+    background-color: #1e2428;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 62px;
+    border-top: 1px solid rgb(48, 48, 48);
+}
+.Chat__footer > form{
+    flex: 1;
+    display: flex;
+    /* flex-direction: column; */
+}
+.Chat__footer > form >input{
+    flex: 1;
+    display: flex;
+    border-radius: 30px;
+    padding: 9px 12px 11px;
+    background-color: #33383b;
+    border: 1px solid #33383b;
+    font-family: 'Mulish';
+    color: #f1f1f2eb;
+}
+.Chat__footer > form >button{
+  display: none;
+}
+.Chat__Name{
+    position: absolute;
+    margin-top:-13px ;
+    /* padding: 6px 7px 9px 9px; */
+    font-weight: 800;
+    font-size: xx-small;
+    color: #6bcbef;
+  
+}
+
+.Chat__Time{
+    color:#f1f1f2a1 ;
+    font-weight: 800;
+    margin-top:13px ;
+    padding-top: 5px;
+    margin-left: -18px;
+    font-size: xx-small;
+    position: absolute;
+}
