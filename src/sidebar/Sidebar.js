@@ -67,11 +67,12 @@ function logout () {
       ? localStorage.getItem("photoURL")
       : null;
       console.log(photoURL)
+      const displayName = localStorage.getItem("displayName");
     return (
         <div className="Sidebar">
            <div className="Sidebar__header">    
            <Avatar style={{marginLeft:"15px"}}src={photoURL}/>
-           <b className="TEXT">BETA</b>
+           <b className="TEXT">{displayName}</b>
            <div className="Sidebar__headerRight">
                <IconButton>
                <DonutLargeRounded style={{color:"#B1B3B5"}}/>

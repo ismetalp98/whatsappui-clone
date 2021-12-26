@@ -32,7 +32,6 @@ useEffect(() =>
 onSnapshot(messagesQuery, (snapshot) => {
     setMessages(snapshot.docs.map(doc => ({
     data:doc.data(),
-    id:doc.id
 })))
  }),
     [roomId]
@@ -66,10 +65,17 @@ function addEmoji(e){
       setEmoji(false);
     }
   };
+//   lastsween photo will upload in the profile pic
+// console.log(messages[messages.length - 1]?.data.photoURL)
+const [lastseenPhoto, setLastseen] = useState("");
+  useEffect(() => {
+    setLastseen(messages[messages.length - 1]?.data.photoURL);
+  }, [messages]);
+//   console.log(lastseenPhoto)
     return (
         <div className="Chat">
             <div className="Chat__header">
-            <Avatar src={`https://avatars.dicebear.com/api/bottts/${seed}.svg`}/>
+            <Avatar src={lastseenPhoto}/>
            
             <div className="Chat__headerinfo">
              <h3>{roomName}</h3>
