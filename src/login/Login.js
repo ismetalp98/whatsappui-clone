@@ -22,7 +22,6 @@ function auth(){
         type: actionTypes.SET_SESSION,
         uid: result.user.uid,
         displayName: result.user.displayName,
-        photoURL: result.user.photoURL,
       });
       // ...
     }).catch((error) => {
