@@ -4,6 +4,7 @@
     width: 100vw;
     display: grid;
     place-items: center;
+    overflow-y: hidden;
 }
 
 .login__container {
