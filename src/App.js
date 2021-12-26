@@ -28,7 +28,7 @@ function App() {
             <Sidebar />
                <Routes>
               <Route  path="/rooms/:roomId" element={<Chat />}/>
-              <Route  path="/rooms" element={<Chat />} />
+              {/* <Route  path="/rooms/:roomId" element={<Chat />} /> */}
             </Routes>
 </BrowserRouter>
 </div>
