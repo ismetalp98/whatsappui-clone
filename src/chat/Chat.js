@@ -5,38 +5,53 @@ import Divider from '@mui/material/Divider';
 import db from '../firebase';
 import { AttachFile, InsertEmoticonOutlined, MicOutlined, MoreVert, SearchRounded } from '@mui/icons-material';
 import { useParams } from "react-router-dom";
-import {  collection,onSnapshot ,doc, getDoc, orderBy } from "firebase/firestore";
+import {  collection,onSnapshot ,doc, getDoc, orderBy, query ,serverTimestamp,addDoc,} from "firebase/firestore";
 function Chat() {
     const[seed,setSeed]=useState("");
     const[input,setInput]=useState("");
     const { roomId } = useParams();
-    // console.log(roomId)
     const [roomName, setRoomName] = useState("");
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState([]);;
     useEffect(() => {
     setSeed(Math.floor(Math.random()*5000))
     }, [])
-    const sendMessage=(e)=>{
-        e.preventDefault();
-        // whenever a message is sent the string automatically becomes empty
-        setInput("");
-    }
     //roomview to get data from
     const d=doc(db,"rooms",roomId)
-
   getDoc(d)
   .then((doc)=>{
      setRoomName(doc.data().name)
   })
 //   timestamp
-const td=doc(collection(db,"rooms","messages","message"),roomId)
+const messagesColRef = collection(db, "rooms", roomId, "messages");
+const messagesQuery = query(messagesColRef, orderBy("timestamp"));
 
-getDoc(td)
-.then((doc)=>{
-    onSnapshot(td,(snapshot)=>( 
-        setMessages(doc.data())))
-})
-console.log(messages)
+
+useEffect(() => 
+
+onSnapshot(messagesQuery, (snapshot) => {
+    setMessages(snapshot.docs.map(doc => ({
+    data:doc.data(),
+    id:doc.id
+})))
+ }),
+      [roomId]
+)
+const displayName = localStorage.getItem("displayName");
+const [issendChecked, setIssendChecked] = useState(false);
+function SendMessage(e){
+    e.preventDefault();
+    if (input.length > 0) {
+        const ds=collection(db,"rooms", roomId,"messages");
+        addDoc(ds, {
+            message: input,
+            name: displayName,
+            timestamp: serverTimestamp(),
+          });
+        setIssendChecked(!issendChecked);
+        setInput("");
+      }
+
+}
     return (
         <div className="Chat">
             <div className="Chat__header">
@@ -44,7 +59,9 @@ console.log(messages)
            
             <div className="Chat__headerinfo">
              <h3>{roomName}</h3>
-             <p>Last seen ...</p>
+             <p>Last seen {" ..."}
+           
+                  </p>
             </div>
             <div className="Chat__headerright">
             <IconButton>
@@ -56,19 +73,22 @@ console.log(messages)
             </div>
             <Divider/>
             <div className="Chat__body">
-                <p className={`Chat__Messages  ${ true && "Chat__Reciver"}`}>
-                <span className='Chat__Name'>Hulk</span>
-                Hello 
-                <span className='Chat__Time'>3:59pm</span>
+       
+            {messages.map((message)=>(
+                <p className={`Chat__Messages  ${message.data.name === displayName && "Chat__Reciver"}`}>
+                <span className='Chat__Name'>{message.data.name}</span>
+              {message.data.message}
+                <span className='Chat__Time'>{new Date(message.data.timestamp?.toDate()).toUTCString().slice(5,12)}</span>
                 </p>
+             ))}
             </div>
             <div className="Chat__footer">
             <IconButton> <InsertEmoticonOutlined style={{color:"#B1B3B5"}}/></IconButton>
                 <IconButton> <AttachFile style={{color:"#B1B3B5"}}/> </IconButton>
-                <form type="submit" onClick={sendMessage}>
+                <form>
                     <input type="text" value={input} onChange={(e)=>setInput(e.target.value)}
                     placeholder='Send a message'/>
-                    <button>Send Messages</button>
+                    <button type="submit" onClick={SendMessage}>Send Messages</button>
                 </form>
                 <IconButton><MicOutlined style={{color:"#B1B3B5",padding:"10px",}}/></IconButton>
             </div>

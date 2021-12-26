@@ -55,11 +55,7 @@ margin-bottom: 30px;
 }
 .Chat__Reciver{
    margin-left: auto;
-font-size: 16px;
-padding: 13px 16px 12px 14px;
-border-radius: 6px;
-margin-top: 2px;
-width: fit-content;
+
     color:#f1f1f2eb ;
     background-color: #1d6f70;
     margin-bottom: 30px;
@@ -94,6 +90,8 @@ width: fit-content;
 .Chat__Name{
     position: absolute;
     margin-top:-13px ;
+    margin-left:-5px;
+    /* padding-bottom: 2px; */
     /* padding: 6px 7px 9px 9px; */
     font-weight: 800;
     font-size: xx-small;

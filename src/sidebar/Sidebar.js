@@ -2,8 +2,7 @@
 import React,{useState,useEffect} from 'react'
 import "./sidebar.css"
 import db from '../firebase';
-
-import { Avatar, Button, IconButton } from '@mui/material';
+import { Avatar, IconButton } from '@mui/material';
 import { ChatBubble, DonutLargeRounded, ExitToAppOutlined, MoreVert, SearchRounded } from '@mui/icons-material';
 import Divider from '@mui/material/Divider';
 import { collection,onSnapshot } from "firebase/firestore";
@@ -23,6 +22,7 @@ function Sidebar() {
     ,[]
     )
 
+
 function logout () {
     const auth = getAuth();
     signOut(auth).then(() => {
@@ -32,11 +32,37 @@ function logout () {
      alert(error.message)
     });
 }
-    // console.log(rooms)
     const[seed,setSeed]=useState("");
     useEffect(() => {
     setSeed(Math.floor(Math.random()*1))
     }, [])
+
+    // serach filter
+    const [search, setSearch] = useState([]);
+    const [input,setInput] = useState("");
+    const [sidebarBool, setsidebarBool] = useState(true);
+    // filters the search according to the alphabert whether CAPS OR SMALL
+    const matcher = (s, values) => {
+        const re = RegExp(`.*${s.toLowerCase().split("").join(".*")}.*`);
+        return values.filter((v) => v.data.name.toLowerCase().match(re));
+      };
+    //   sets the search if the room nmae lenght is >0
+      useEffect(() => {
+        if (rooms.length > 0) {
+          setSearch(matcher(input, rooms));
+        }
+        if (input === "") {
+          setsidebarBool(true);
+        }
+      }, [input]);
+    //   value of input changes
+      const handleChange = (e) => {
+        setsidebarBool(false);
+        setInput(e.target.value);
+      };
+
+    //   photo
+    
     return (
         <div className="Sidebar">
            <div className="Sidebar__header">    
@@ -53,21 +79,29 @@ function logout () {
         <Divider/>
                <div className="Sidebar__search">
                    <div className="Sidebar__searchContainer">   <SearchRounded />
-                   <input placeholder="Search or Start New Chat" type="text"/></div>
+                   <input placeholder="Search or Start New Chat" type="text" value={input} onChange={handleChange}/></div>
                 
                </div>
                <Divider/>
-               <div className="Sidebar__chats">
-                   {/* calling add new chat/room */}
-                   <Sidebarchat addNewChat='true'/>
-                   {/* <Sidebarchat/> */}
-                   {rooms.map((room) => (
+               {/* checks the condition  whetjher the room nmae present or not */}
+               {sidebarBool ? (
+            <div className="Sidebar__chats">
+              <Sidebarchat addNewChat="true" />
+              {rooms.map((room) => (
                 <Sidebarchat key={room.id} id={room.id} name={room.data.name} />
               ))}
-               </div>
+            </div>
+          ) : (
+            <div className="Sidebar__chats">
+              <Sidebarchat addNewChat="true" />
+              {search.map((room) => (
+                <Sidebarchat key={room.id} id={room.id} name={room.data.name} />
+              ))}
+            </div>
+          )}
 
         </div>
     )
 }
 
-export default Sidebar
+export default Sidebar;
