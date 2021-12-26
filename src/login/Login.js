@@ -1,13 +1,13 @@
 import React from "react";
 import { Button } from "@mui/material";
 import "./Login.css";
-import { auth, provider } from "../firebase";
+import {  provider } from "../firebase";
 import { useStateValue } from "./StateProvider";
 import { actionTypes } from "./reducer";
-import { getAuth, getRedirectResult, GoogleAuthProvider,signInWithPopup } from "firebase/auth";
+import { getAuth,signInWithPopup } from "firebase/auth";
 function Login() {
     const [{}, dispatch] = useStateValue();
-
+// dispatch updates the previous state
 function auth(){
   const auth = getAuth();
   signInWithPopup(auth, provider)

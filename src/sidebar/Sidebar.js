@@ -1,9 +1,10 @@
 // sidebar for chat icons and working
+
 import React,{useState,useEffect} from 'react'
 import "./sidebar.css"
 import db from '../firebase';
 import { Avatar, IconButton } from '@mui/material';
-import { ChatBubble, DonutLargeRounded, ExitToAppOutlined, MoreVert, SearchRounded } from '@mui/icons-material';
+import { ChatBubble, DonutLargeRounded, ExitToAppOutlined, SearchRounded } from '@mui/icons-material';
 import Divider from '@mui/material/Divider';
 import { collection,onSnapshot } from "firebase/firestore";
 import Sidebarchat from './Sidebarchat';
@@ -66,7 +67,7 @@ function logout () {
     return (
         <div className="Sidebar">
            <div className="Sidebar__header">    
-           <Avatar src={`https://avatars.dicebear.com/api/open-peeps/${seed}.svg`}/>
+           <Avatar style={{padding:"0 15px 0 13px"}}src={`https://avatars.dicebear.com/api/open-peeps/${seed}.svg`}/>
            <b className="TEXT">BETA</b>
            <div className="Sidebar__headerRight">
                <IconButton>

@@ -47,6 +47,7 @@ function SendMessage(e){
             message: input,
             name: displayName,
             timestamp: serverTimestamp(),
+            
           });
         setIssendChecked(!issendChecked);
         setInput("");

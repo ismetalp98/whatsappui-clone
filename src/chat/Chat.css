@@ -46,7 +46,7 @@ overflow: scroll;
 .Chat__Messages{
 position: relative;
 font-size: 16px;
-padding: 20px 50px 13px 22px;
+padding: 19px 65px 13px 16px;
 border-radius: 6px;
 margin-top: 2px;
 max-width: 40vw;
@@ -95,9 +95,9 @@ overflow-wrap: anywhere;
     position: absolute;
     margin-top:-13px ;
     margin-left:0px;
-
+    padding-bottom: 2px;
     font-weight: 800;
-    font-size: xx-small;
+    font-size: 12px;
     color: #6bcbef;
   
 }
@@ -105,11 +105,11 @@ overflow-wrap: anywhere;
 .Chat__Time{
     color:#f1f1f2a1 ;
     font-weight: 800;
-    margin-top:13px ;
+    margin-top:6px ;
     padding-top: 5px;
     position: relative;
-    /* margin-left: -18px; */
-    font-size: xx-small;
+    margin-left: 24px;
+    font-size: 12px;
     position: absolute;
 }
 /* .emoji-mart {
