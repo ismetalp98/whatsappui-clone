@@ -22,6 +22,7 @@ function auth(){
         type: actionTypes.SET_SESSION,
         uid: result.user.uid,
         displayName: result.user.displayName,
+        photoURL: result.user.photoURL,
       });
       // ...
     }).catch((error) => {
@@ -40,7 +41,7 @@ function auth(){
         <div className="login__text">
           <h1>Sign in to Whatsapp</h1>
         </div>
-        <Button style={{background:"#0fb45c",color:"white",fontFamily:"Mulish"}} onClick={auth}>Sign In with Google</Button>
+        <Button style={{background:"#0fb45c",color:"white",fontFamily:"Open sans",textTransform:"capitalize"}} onClick={auth}>Sign In with Google</Button>
       </div>
     </div>
   );

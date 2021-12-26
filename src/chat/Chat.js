@@ -47,6 +47,7 @@ function SendMessage(e){
             message: input,
             name: displayName,
             timestamp: serverTimestamp(),
+            photoURL: localStorage.getItem("photoURL"),
             
           });
         setIssendChecked(!issendChecked);

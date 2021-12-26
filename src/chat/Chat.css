@@ -85,7 +85,7 @@ overflow-wrap: anywhere;
     padding: 9px 12px 11px;
     background-color: #33383b;
     border: 1px solid #33383b;
-    font-family: 'Mulish';
+    font-family: 'Open sans';
     color: #f1f1f2eb;
 }
 .Chat__footer > form >button{
@@ -318,7 +318,7 @@ overflow-wrap: anywhere;
 }
 
 .emoji-mart-emoji-native {
-  font-family: "Mulish";
+  font-family: "Open sans";
 }
 
 .emoji-mart-no-results {

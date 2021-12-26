@@ -1,5 +1,4 @@
 // sidebar for chat icons and working
-
 import React,{useState,useEffect} from 'react'
 import "./sidebar.css"
 import db from '../firebase';
@@ -63,11 +62,15 @@ function logout () {
       };
 
     //   photo
-    
+    const photoURL =
+    localStorage.getItem("photoURL") !== ""
+      ? localStorage.getItem("photoURL")
+      : null;
+      console.log(photoURL)
     return (
         <div className="Sidebar">
            <div className="Sidebar__header">    
-           <Avatar style={{padding:"0 15px 0 13px"}}src={`https://avatars.dicebear.com/api/open-peeps/${seed}.svg`}/>
+           <Avatar style={{marginLeft:"15px"}}src={photoURL}/>
            <b className="TEXT">BETA</b>
            <div className="Sidebar__headerRight">
                <IconButton>
