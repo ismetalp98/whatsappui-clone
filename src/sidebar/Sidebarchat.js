@@ -1,11 +1,9 @@
 import React,{useState,useEffect} from 'react'
 import "./sidebarchat.css"
-
 import { Link } from "react-router-dom";
 import { Avatar } from '@mui/material';
-import { useParams } from "react-router-dom";
 import db from '../firebase';
-import {  collection,onSnapshot ,doc, getDoc,getDocs, orderBy, query ,serverTimestamp,setDoc,addDoc,startAfter} from "firebase/firestore";
+import {  collection,onSnapshot , orderBy, query ,addDoc} from "firebase/firestore";
 import { AddCircleOutline } from '@mui/icons-material';
 function Sidebarchat (props) {
   // calling from anaother page and rendering props
@@ -29,9 +27,7 @@ function Sidebarchat (props) {
         });
       }
     };
-    // DONE
-  //last message
-  // const q=collection(db,"rooms", id,"messages")
+// get by id about last message wfrom firebase
   useEffect(() => {
     
     if(id){
@@ -45,16 +41,6 @@ function Sidebarchat (props) {
     }
   
   }, [id])
-  // if(id){
- 
-  //   onSnapshot(collection(db,"rooms", id,"messages"),(snapshot) => 
-  //          setMessages(snapshot.docs.map((doc) => ({
-  //           data:doc.data().message,
-       
-  //       }))))
-  // }
-
-// console.log(messages)
     return addNewChat!=="true"?(
       <Link to ={`/rooms/${id}`}  style={{textDecoration:"none"}}>
         <div className="Sidebarchat">
@@ -68,7 +54,7 @@ function Sidebarchat (props) {
     ):(
         <div onClick={createChat} className="Sidebarchat">
     
-       Addnew     <AddCircleOutline style={{size:"10px"}}/>
+      <p>Add New</p> <AddCircleOutline  style={{fontSize:"small",display:"flex",marginTop:"5px",marginLeft:"5px"}}/>
         </div>
     )
 }

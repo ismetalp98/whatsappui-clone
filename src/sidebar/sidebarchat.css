@@ -1,9 +1,15 @@
 .Sidebarchat{
 display: flex;
 padding: 15px;
+
 border-bottom:1px solid rgb(48, 48, 48);
 border-right:1px solid rgb(48, 48, 48);
 }
+.Sidebarchat>p{
+    display: flex;
+    /* padding: 15px; */
+    margin-left: 30%;
+    }
 .Sidebarchat:hover{
     background-color:#2d3134;
 }
@@ -14,7 +20,9 @@ color: #f1f1f2eb;
 }
 .SidebarChat_info > p{
     font-size: 15px;
-
+    max-width: 30vw;
+    white-space: nowrap;
+    overflow: hidden;
     color: #f1f1f2a1;
     }
 

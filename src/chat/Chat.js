@@ -6,6 +6,7 @@ import db from '../firebase';
 import { AttachFile, InsertEmoticonOutlined, MicOutlined, MoreVert, SearchRounded } from '@mui/icons-material';
 import { useParams } from "react-router-dom";
 import {  collection,onSnapshot ,doc, getDoc, orderBy, query ,serverTimestamp,addDoc,} from "firebase/firestore";
+import { Picker } from "emoji-mart";
 function Chat() {
     const[seed,setSeed]=useState("");
     const[input,setInput]=useState("");
@@ -34,7 +35,7 @@ onSnapshot(messagesQuery, (snapshot) => {
     id:doc.id
 })))
  }),
-      [roomId]
+    [roomId]
 )
 const displayName = localStorage.getItem("displayName");
 const [issendChecked, setIssendChecked] = useState(false);
@@ -52,6 +53,17 @@ function SendMessage(e){
       }
 
 }
+// emoji 
+const [emoji, setEmoji] = useState(false);
+function addEmoji(e){ 
+    let emoji = e.native;
+    setInput(input + emoji);
+}
+  const checkEmojiClose = () => {
+    if (emoji) {
+      setEmoji(false);
+    }
+  };
     return (
         <div className="Chat">
             <div className="Chat__header">
@@ -59,9 +71,7 @@ function SendMessage(e){
            
             <div className="Chat__headerinfo">
              <h3>{roomName}</h3>
-             <p>Last seen {" ..."}
-           
-                  </p>
+        
             </div>
             <div className="Chat__headerright">
             <IconButton>
@@ -72,7 +82,7 @@ function SendMessage(e){
             </div>
             </div>
             <Divider/>
-            <div className="Chat__body">
+            <div className="Chat__body" onClick={checkEmojiClose}>
        
             {messages.map((message)=>(
                 <p className={`Chat__Messages  ${message.data.name === displayName && "Chat__Reciver"}`}>
@@ -83,10 +93,18 @@ function SendMessage(e){
              ))}
             </div>
             <div className="Chat__footer">
-            <IconButton> <InsertEmoticonOutlined style={{color:"#B1B3B5"}}/></IconButton>
+            <IconButton>
+              {/* <InsertEmoticonIcon /> */}
+              <InsertEmoticonOutlined 
+              
+                style={{color:"#B1B3B5"}}
+                onClick={() => setEmoji(!emoji)}
+              />
+              {emoji ? <Picker className="emoji-mart-dark" onSelect={addEmoji} /> : null}
+            </IconButton>
                 <IconButton> <AttachFile style={{color:"#B1B3B5"}}/> </IconButton>
                 <form>
-                    <input type="text" value={input} onChange={(e)=>setInput(e.target.value)}
+                    <input type="text" value={input}  onClick={checkEmojiClose}onChange={(e)=>setInput(e.target.value)}
                     placeholder='Send a message'/>
                     <button type="submit" onClick={SendMessage}>Send Messages</button>
                 </form>
