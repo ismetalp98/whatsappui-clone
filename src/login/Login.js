@@ -41,7 +41,7 @@ function auth(){
         <div className="login__text">
           <h1>Sign in to Whatsapp</h1>
         </div>
-        <Button style={{background:"#0fb45c",color:"white",fontFamily:"Open sans",textTransform:"capitalize"}} onClick={auth}>Sign In with Google</Button>
+        <Button style={{background:"#0fb45c",color:"white",fontFamily:"Open sans",textTransform:"capitalize",marginTop:"20px"}} onClick={auth}>Sign In with Google</Button>
       </div>
     </div>
   );
