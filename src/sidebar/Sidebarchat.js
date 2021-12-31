@@ -47,6 +47,7 @@ function Sidebarchat (props) {
          <Avatar style={{padding:"0 15px 0 13px"}}src={`https://avatars.dicebear.com/api/bottts/${seed}.svg`}/>
          <div className="SidebarChat_info">
              <h2 >{name}</h2>
+             {/* this will show the last sent or recieved message */}
              <p >{messages[0]?.data.message}</p>
          </div>
         </div>
