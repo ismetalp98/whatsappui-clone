@@ -91,10 +91,12 @@ const [lastseenPhoto, setLastseen] = useState("");
             </div>
             <Divider/>
             <div className="Chat__body" onClick={checkEmojiClose}>
-       
+       {/* checks the condtion to apply css 
+       for eg : if a message is sent by sendwer the message color will be differnet and reciever color will be differfnt  */}
             {messages.map((message)=>(
                 <p className={`Chat__Messages  ${message.data.name === displayName && "Chat__Reciver"}`}>
                 <span className='Chat__Name'>{message.data.name}</span>
+                <br></br>
               {message.data.message}
                 <span className='Chat__Time'>{new Date(message.data.timestamp?.toDate()).toUTCString().slice(5,12)}</span>
                 </p>
