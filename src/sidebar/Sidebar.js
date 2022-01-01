@@ -2,10 +2,10 @@
 import React,{useState,useEffect} from 'react'
 import "./sidebar.css"
 import db from '../firebase';
-import { Avatar, IconButton } from '@mui/material';
-import { ChatBubble, DonutLargeRounded, ExitToAppOutlined, SearchRounded } from '@mui/icons-material';
+import { Avatar, IconButton, Tooltip } from '@mui/material';
+import { AddCircleOutline, ChatBubble, DonutLargeRounded, ExitToAppOutlined, SearchRounded } from '@mui/icons-material';
 import Divider from '@mui/material/Divider';
-import { collection,onSnapshot } from "firebase/firestore";
+import { collection,onSnapshot,addDoc } from "firebase/firestore";
 import Sidebarchat from './Sidebarchat';
 import { getAuth, signOut } from "firebase/auth";
 
@@ -60,7 +60,19 @@ function logout () {
         setsidebarBool(false);
         setInput(e.target.value);
       };
-
+// add room
+ const createChat = () => {
+      const roomName = prompt("Please enter name for chat");
+      if (roomName && roomName.length >= 20) {
+        return alert("enter a shorter name for the room");
+      }
+      if (roomName) {
+         addDoc(collection(db, "rooms"), {
+          name: roomName,
+    
+        });
+      }
+    };
     //   photo
     const photoURL =
     localStorage.getItem("photoURL") !== ""
@@ -75,10 +87,13 @@ function logout () {
            <b className="TEXT">{displayName}</b>
            <div className="Sidebar__headerRight">
                <IconButton>
-               <DonutLargeRounded style={{color:"#B1B3B5"}}/>
+                 <Tooltip title="Add Room"> 
+               <AddCircleOutline  onClick={createChat} style={{color:"#B1B3B5"}}/>
+               </Tooltip>
                </IconButton>
                <IconButton> <ChatBubble style={{color:"#B1B3B5"}}/> </IconButton>
-               <IconButton onClick={logout}><ExitToAppOutlined   style={{color:"#B1B3B5"}}/> </IconButton>
+               <IconButton onClick={logout}>  <Tooltip title="Logout"> 
+                 <ExitToAppOutlined   style={{color:"#B1B3B5"}}/></Tooltip> </IconButton>
            </div>
         </div>
         <Divider/>

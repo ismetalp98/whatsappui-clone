@@ -47,7 +47,7 @@
   border-radius: 5px 20px 30px 40px;
   position: relative;
   font-size: 16px;
-  padding: 22px 78px 14px 17px;
+  padding: 8px 78px 14px 17px;
   margin-top: 2px;
   max-width: 40vw;
   width: fit-content;
@@ -101,16 +101,13 @@
 
 .Chat__Time {
   color: #f1f1f2a1;
-  font-weight: 800;
-  vertical-align: top;
-  height: 15px;
   font-size: 11px;
-  line-height: 15px;
-  white-space: nowrap;
-  margin-top: 6px;
-  padding-top: 5px;
-  /* position: relative; */
+  /* color: #999; */
   margin-left: 15px;
+  text-align: right;
+  height: 15px;
+  margin-top: 15px;
+  font-weight: 800;
   position: absolute;
 }
 /* .emoji-mart {

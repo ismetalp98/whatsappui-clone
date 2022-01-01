@@ -53,10 +53,7 @@ function Sidebarchat (props) {
         </div>
         </Link>
     ):(
-        <div onClick={createChat} className="Sidebarchat">
-    
-      <p>Add New</p> <AddCircleOutline  style={{fontSize:"small",display:"flex",marginTop:"5px",marginLeft:"5px"}}/>
-        </div>
+        null
     )
 }
 export default Sidebarchat
