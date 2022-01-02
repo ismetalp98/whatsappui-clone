@@ -25,7 +25,7 @@ function Chat() {
 //   timestamp
 const messagesColRef = collection(db, "rooms", roomId, "messages");
 const messagesQuery = query(messagesColRef, orderBy("timestamp"));
-
+// console.log(messages)
 
 useEffect(() => 
 
