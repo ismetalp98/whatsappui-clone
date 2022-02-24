@@ -3,7 +3,7 @@ import "./Chat.css";
 import { Avatar,IconButton  } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import db from '../firebase';
-import { AttachFile, InsertEmoticonOutlined, MicOutlined, MoreVert, SearchRounded } from '@mui/icons-material';
+import { AttachFile, InsertEmoticonOutlined, MicOutlined, MoreVert, Search, SearchRounded } from '@mui/icons-material';
 import { useParams } from "react-router-dom";
 import {  collection,onSnapshot ,doc, getDoc, orderBy, query ,serverTimestamp,addDoc,} from "firebase/firestore";
 import { Picker } from "emoji-mart";
@@ -65,6 +65,30 @@ function addEmoji(e){
       setEmoji(false);
     }
   };
+  // search
+   const [search, setSearch] = useState([]);
+       console.log(search)
+    const [inputs,setInputs] = useState("");
+    const [sidebarBool, setsidebarBool] = useState(true);
+    // filters the search according to the alphabert whether CAPS OR SMALL
+    const matcher = (s, values) => {
+        const re = RegExp(`.*${s.toLowerCase().split("").join(".*")}.*`);
+        return values.filter((v) => v.data.name.toLowerCase().match(re));
+      };
+    //   sets the search if the room nmae lenght is >0
+      useEffect(() => {
+        if (messages.length > 0) {
+          setSearch(matcher(inputs,messages));
+        }
+        if (inputs === "") {
+          setsidebarBool(true);
+        }
+      }, [inputs]);
+    //   value of input changes
+      const handleChange = (e) => {
+        setsidebarBool(false);
+        setInputs(e.target.value);
+      };
 //   lastsween photo will upload in the profile pic
 // console.log(messages[messages.length - 1]?.data.photoURL)
 const [lastseenPhoto, setLastseen] = useState("");
@@ -82,14 +106,25 @@ const [lastseenPhoto, setLastseen] = useState("");
         
             </div>
             <div className="Chat__headerright">
-            <IconButton>
-               <SearchRounded style={{color:"#B1B3B5"}}/>
+        
+                 <input style={{        fontFamily: "Open sans",
+
+    borderRadius: "20px",    
+    /* padding: 10px; */
+    backgroundColor:"#323739",
+    color: "lightgray",
+     outline: "none",
+
+    }} placeholder="Search Based on Name" type="text" value={inputs} onChange={handleChange}/>
+                   <IconButton><SearchRounded style={{color:"#B1B3B5"}} />
+                             
                </IconButton>
                
                <IconButton> <MoreVert style={{color:"#B1B3B5"}}/> </IconButton>
             </div>
             </div>
             <Divider/>
+            {sidebarBool ? (
             <div className="Chat__body" onClick={checkEmojiClose}>
        {/* checks the condtion to apply css 
        for eg : if a message is sent by sendwer the message color will be differnet and reciever color will be differfnt  */}
@@ -101,7 +136,22 @@ const [lastseenPhoto, setLastseen] = useState("");
                 <span className='Chat__Time'>{new Date(message.data.timestamp?.toDate()).toUTCString().slice(5,12)}</span>
                 </p>
              ))}
+         
             </div>
+                ):( 
+                <div className="Chat__body" onClick={checkEmojiClose}>
+              {search.map((message)=>(
+                <p className={`Chat__Messages  ${message.data.name === displayName && "Chat__Reciver"}`}>
+                <span className='Chat__Name'>{message.data.name}</span>
+                <br></br>
+              {message.data.message}
+                <span className='Chat__Time'>{new Date(message.data.timestamp?.toDate()).toUTCString().slice(5,12)}</span>
+                </p>
+             ))}
+         
+            </div>
+            )}
+
             <div className="Chat__footer">
             <IconButton>
               {/* <InsertEmoticonIcon /> */}

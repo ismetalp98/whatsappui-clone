@@ -39,6 +39,7 @@ function logout () {
 
     // serach filter
     const [search, setSearch] = useState([]);
+    console.log(search)
     const [input,setInput] = useState("");
     const [sidebarBool, setsidebarBool] = useState(true);
     // filters the search according to the alphabert whether CAPS OR SMALL
@@ -98,7 +99,8 @@ function logout () {
         </div>
         <Divider/>
                <div className="Sidebar__search">
-                   <div className="Sidebar__searchContainer">   <SearchRounded />
+                   <div className="Sidebar__searchContainer">  
+                    <SearchRounded />
                    <input placeholder="Search or Start New Chat" type="text" value={input} onChange={handleChange}/></div>
                 
                </div>
