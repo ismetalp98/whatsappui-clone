@@ -3,14 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
-
-import reducer, { initialState } from "./login/reducer";
-import { StateProvider } from "./login/StateProvider";
-
 ReactDOM.render(
-  <StateProvider initialState={initialState} reducer={reducer}>
-    <App />
-  </StateProvider>,
+  <App />,
   document.getElementById("root")
 );
 
