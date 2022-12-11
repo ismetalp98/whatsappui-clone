@@ -1,0 +1,116 @@
+.Chat {
+  display: flex;
+  flex: 0.7;
+  flex-direction: column;
+  /* background-color: lightgray; */
+}
+.Chat__header {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  height: 40px;
+  border-bottom: 1px solid rgb(48, 48, 48);
+}
+.Chat__headerinfo {
+  flex: 1;
+  padding-left: 20px;
+}
+.Chat__headerinfo > h3 {
+  margin-bottom: 3px;
+  font-size: 16px;
+  font-weight: 900;
+  color: #f1f1f2eb;
+}
+.Chat__headerinfo > p {
+  color: #f1f1f2a1;
+  font-size: 12px;
+}
+
+.Chat__body {
+  background-image: url(./back.jpg);
+  /* background-position: center; */
+  background-repeat: repeat;
+  padding-right: 9%;
+  padding-left: 9%;
+  padding-top: 12px;
+  overflow: scroll;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.Chat__Messages {
+  border-radius: 5px 20px 30px 40px;
+  position: relative;
+  font-size: 16px;
+  padding: 8px 78px 14px 17px;
+  margin-top: 2px;
+  max-width: 40vw;
+  width: fit-content;
+  color: #f1f1f2eb;
+  background-color: #323739;
+  margin-bottom: 30px;
+  overflow-wrap: anywhere;
+}
+.Chat__Reciver {
+  margin-left: auto;
+  border-radius: 40px 0px 40px 20px;
+  color: #f1f1f2eb;
+  background-color: #1d6f70;
+  margin-bottom: 30px;
+}
+.Chat__footer {
+  background-color: #1e2428;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 62px;
+  border-top: 1px solid rgb(48, 48, 48);
+}
+.Chat__footer > form {
+  flex: 1;
+  display: flex;
+  /* flex-direction: column; */
+}
+.Chat__footer > form > input {
+  flex: 1;
+  display: flex;
+  border-radius: 30px;
+  padding: 9px 12px 11px;
+  background-color: #33383b;
+  border: 1px solid #33383b;
+  font-family: "Open sans";
+  color: #f1f1f2eb;
+}
+.Chat__footer > form > button {
+  display: none;
+}
+.Chat__Name {
+  position: absolute;
+  margin-top: -1px;
+  margin-left: 0px;
+  padding-bottom: 2px;
+  font-weight: 800;
+  font-size: 12px;
+  color: #6bcbef;
+}
+
+.Chat__Time {
+  color: #f1f1f2a1;
+  font-size: 11px;
+  /* color: #999; */
+  margin-left: 15px;
+  text-align: right;
+  height: 15px;
+  margin-top: 15px;
+  font-weight: 800;
+  position: absolute;
+}
+
+@media (max-width: 628px) {
+  .Chat__header {
+    background-color: #323739;
+    width: -webkit-fill-available;
+    /* position: relative; */
+    padding: 7px;
+  }
+}
