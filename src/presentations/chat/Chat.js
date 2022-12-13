@@ -3,7 +3,9 @@ import "./Chat.css";
 import { Avatar } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import { useParams } from "react-router-dom";
-import { getMessages, sendMessage } from '../../repository/chatRepo';
+import { getMessages, sendMessage } from '../../services/chatServices';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 
 function Chat() {
   const [input, setInput] = useState("");
@@ -11,9 +13,19 @@ function Chat() {
   const [messages, setMessages] = useState([]);
   const user = sessionStorage.getItem("user");
 
-  getMessages(user, roomId).then((messages) => {
-    setMessages(messages);
-  })
+  const messagesEndRef = useRef(null);
+  
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages]);
+
+  useEffect(() => {
+    getMessages(user, roomId, setMessages);
+  }, [roomId]);
 
   function SendMessage(e) {
     e.preventDefault();
@@ -23,6 +35,7 @@ function Chat() {
     }
   }
 
+  console.log('test');
   return (
     <div className="Chat">
       <div className="Chat__header">
@@ -41,6 +54,7 @@ function Chat() {
             <span className='Chat__Time'>{new Date(message.data.timestamp?.toDate()).toUTCString().slice(5, 12)}</span>
           </p>
         ))}
+        <div ref={messagesEndRef} />
       </div>
       <div className="Chat__footer">
         <form>

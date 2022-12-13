@@ -5,7 +5,7 @@ import { Avatar, IconButton, Tooltip } from '@mui/material';
 import { AddCircleOutline } from '@mui/icons-material';
 import Divider from '@mui/material/Divider';
 import Sidebarchat from './Sidebarchat';
-import { getUsers, getChats, createChat } from '../repository/userRepo';
+import { getUsers, getChats, createChat } from '../../services/userService';
 
 function Sidebar() {
   const [rooms, setRooms] = useState([]);
@@ -15,7 +15,7 @@ function Sidebar() {
 
   useEffect(() => {
     getChats(user).then((rooms) => setRooms(rooms));
-    getUsers().then((users) => setUsers(users));
+    getUsers().then((result) => setUsers(result));
   }, [user, created]);
 
   const createChatFunc = () => {

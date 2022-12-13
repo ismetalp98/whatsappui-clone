@@ -2,7 +2,7 @@
 import './App.css';
 import Chat from './presentations/chat/Chat';
 import React, { useEffect } from 'react';
-import Sidebar from './sidebar/Sidebar';
+import Sidebar from './presentations/sidebar/Sidebar';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { registerUser } from './repository/userRepo';
 
